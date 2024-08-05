@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWADAssgClasses", "SWADAssgClasses\SWADAssgClasses.csproj", "{EC627587-D210-43ED-8A3B-A0D77F1093B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC627587-D210-43ED-8A3B-A0D77F1093B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC627587-D210-43ED-8A3B-A0D77F1093B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC627587-D210-43ED-8A3B-A0D77F1093B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC627587-D210-43ED-8A3B-A0D77F1093B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3865DDC-D5BF-4A2E-B780-C97F95730C08}
+	EndGlobalSection
+EndGlobal
