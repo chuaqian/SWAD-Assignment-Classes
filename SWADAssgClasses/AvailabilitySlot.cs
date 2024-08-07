@@ -11,5 +11,11 @@ namespace SWADAssgClasses
         public string slotId { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
+        public AvailabilitySlot(string slotId, DateTime startDate, DateTime endDate)
+        {
+            this.slotId = slotId;
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
     }
 }

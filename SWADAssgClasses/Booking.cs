@@ -15,14 +15,20 @@ namespace SWADAssgClasses
         public string bookingPayment { get; set; }
         public string returnLocation { get; set; }
         public string pickUpLocation { get; set; }
+        public bool isActive { get; set; }
         public Car RentedCar { get; set; }
         public Renter Renter { get; set; }
 
-        public Booking(string bookingId, DateTime startDate, DateTime endDate)
+        public Booking(string bookingId, DateTime bookingStartDate, DateTime bookingEndDate, decimal bookingRentalFee, string bookingPayment, string returnLocation, string pickUpLocation, bool isActive)
         {
             this.bookingId = bookingId;
-            this.bookingStartDate = startDate;
-            this.bookingEndDate = endDate;
+            this.bookingStartDate = bookingStartDate;
+            this.bookingEndDate = bookingEndDate;
+            this.bookingRentalFee = bookingRentalFee;
+            this.bookingPayment = bookingPayment;
+            this.returnLocation = returnLocation;
+            this.pickUpLocation = pickUpLocation;
+            this.isActive = isActive;
         }
 
         public bool ModifyBookingDates(DateTime newStartDate, DateTime newEndDate)

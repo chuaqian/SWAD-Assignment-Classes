@@ -16,7 +16,7 @@ namespace SWADAssgClasses
         public bool isPrime { get; set; }
         public DateTime dateOfBirth { get; set; }
         public string renterAddress { get; set; }
-        public Booking CurrentBooking { get; set; }
+        public List<Booking> bookings { get; set; }
 
         public Renter(string userId, string fullName, string contactDetails, string email, string password, bool isVerified,
             string driverLicense, string paymentMethod, decimal monthlySpending, bool roadsideAssistanceDiscount,
@@ -30,17 +30,24 @@ namespace SWADAssgClasses
             this.isPrime = isPrime;
             this.dateOfBirth = dateOfBirth;
             this.renterAddress = renterAddress;
+            this.bookings = new List<Booking>();
         }
 
+        /*
         public bool ModifyReservation(DateTime newStartDate, DateTime newEndDate)
         {
-            if (CurrentBooking == null)
+            if (bookings == null)
             {
                 Console.WriteLine("no active booking to modify.");
                 return false;
             }
 
-            return CurrentBooking.ModifyBookingDates(newStartDate, newEndDate);
+            return bookings.ModifyBookingDates(newStartDate, newEndDate);
+        }
+        */
+        public void AddBooking(Booking booking)
+        {
+            bookings.Add(booking);
         }
     }
 }
