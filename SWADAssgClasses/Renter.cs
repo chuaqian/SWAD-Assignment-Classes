@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,18 +32,25 @@ namespace SWADAssgClasses
             this.bookings = new List<Booking>();
         }
 
-        /*
-        public bool ModifyReservation(DateTime newStartDate, DateTime newEndDate)
+        public bool ModifyReservation(DateTime newStartDate, DateTime newEndDate, DateTime currentDateTime)
         {
-            if (bookings == null)
+            if (bookings == null || bookings.Count == 0)
             {
-                Console.WriteLine("no active booking to modify.");
+                Console.WriteLine("No active booking to modify.");
                 return false;
             }
 
-            return bookings.ModifyBookingDates(newStartDate, newEndDate);
+            // Find the active booking
+            var activeBooking = bookings.Find(b => b.isActive);
+            if (activeBooking == null)
+            {
+                Console.WriteLine("No active booking to modify.");
+                return false;
+            }
+
+            return activeBooking.ModifyBookingDates(newStartDate, newEndDate, currentDateTime);
         }
-        */
+
         public void AddBooking(Booking booking)
         {
             bookings.Add(booking);

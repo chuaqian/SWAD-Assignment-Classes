@@ -1,5 +1,5 @@
 ﻿// Chua Qi An IT04 S10258309E
-/*
+
 using SWADAssgClasses;
 using System;
 using System.Collections.Generic;
@@ -19,38 +19,29 @@ namespace SWADAssgClasses
             Renter renter = new Renter("1", "John Doe", "123 Main St", "john@example.com", "password", true,
                 "D1234567", "Credit Card", 200m, false, true, DateTime.ParseExact("1990-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture), "123 Main St");
 
-            Car car = new Car
-            {
-                carId = "C1",
-                carMake = "Toyota",
-                carModel = "Camry",
-                carYear = 2020,
-                rentalRate = 50m
-            };
+            Car car = new Car("C1", "Toyota", "Camry", 2020, 50000, true, 50m, "Available", "SGX1234A");
 
-            car.AvailabilitySlots.Add(new AvailabilitySlot
-            {
-                slotId = "S1",
-                startDate = DateTime.ParseExact("2024-08-05 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                endDate = DateTime.ParseExact("2024-08-15 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
-            });
+            car.AvailabilitySlots.Add(new AvailabilitySlot("S1", DateTime.ParseExact("2024-08-05 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("2024-08-15 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)));
 
-            Booking booking = new Booking("B1", DateTime.ParseExact("2024-08-07 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), DateTime.ParseExact("2024-08-12 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture))
+            Booking booking = new Booking("B1", DateTime.ParseExact("2024-08-07 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("2024-08-12 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), 250m, "Credit Card", "Return Location", "Pick Up Location", true)
             {
                 RentedCar = car,
                 Renter = renter
             };
 
+            // add booking to renter
+            renter.AddBooking(booking);
+
             // Set the boolean value based on whether a booking exists or not
-            bool hasBooking = booking != null;
+            bool hasBooking = booking != null && booking.isActive;
 
             if (!hasBooking)
             {
-                Console.WriteLine("No booking found. Please make a reservation first.");
+                Console.WriteLine("No active booking found. Please make a reservation first.");
                 return;
             }
-
-            renter.CurrentBooking = booking;
 
             // get current reservation details
             var currentDetails = booking.GetCurrentReservationDetails();
@@ -101,7 +92,7 @@ namespace SWADAssgClasses
                     }
 
                     // modify the start date
-                    bool modificationSuccess = renter.ModifyReservation(newStartDate, currentDetails.endDate);
+                    bool modificationSuccess = booking.ModifyBookingDates(newStartDate, currentDetails.endDate, currentDateTime);
 
                     if (modificationSuccess)
                     {
@@ -119,7 +110,7 @@ namespace SWADAssgClasses
                 else if (choice == "end")
                 {
                     // generate available end times starting from the current end date onwards for 5 days
-                    List<DateTime> availableEndTimes = GenerateAvailableEndTimes(currentDetails.endDate.AddDays(1), currentDetails.endDate.AddDays(6), car);
+                    List<DateTime> availableEndTimes = GenerateAvailableEndTimes(currentDetails.startDate, currentDetails.endDate.AddDays(5), car);
 
                     DisplayAvailableTimes(availableEndTimes);
 
@@ -147,7 +138,7 @@ namespace SWADAssgClasses
                     }
 
                     // modify the end date
-                    bool modificationSuccess = renter.ModifyReservation(currentDetails.startDate, newEndDate);
+                    bool modificationSuccess = booking.ModifyBookingDates(currentDetails.startDate, newEndDate, currentDateTime);
 
                     if (modificationSuccess)
                     {
@@ -232,4 +223,3 @@ namespace SWADAssgClasses
         }
     }
 }
-*/

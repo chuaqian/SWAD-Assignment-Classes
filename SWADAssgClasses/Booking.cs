@@ -31,15 +31,16 @@ namespace SWADAssgClasses
             this.isActive = isActive;
         }
 
-        public bool ModifyBookingDates(DateTime newStartDate, DateTime newEndDate)
+        public bool ModifyBookingDates(DateTime newStartDate, DateTime newEndDate, DateTime currentDateTime)
         {
-            if ((newStartDate - DateTime.Now).TotalHours < 24)
+            // Check if the current time is within 24 hours of the booking start date
+            if ((bookingStartDate - currentDateTime).TotalHours < 24)
             {
                 Console.WriteLine("Modification not allowed within 24 hours of the start date.");
                 return false;
             }
 
-            // additional logic to check availability and conflicts could be added here
+            // Update booking dates
             bookingStartDate = newStartDate;
             bookingEndDate = newEndDate;
             Console.WriteLine("Booking dates modified successfully.");
