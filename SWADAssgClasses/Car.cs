@@ -8,7 +8,8 @@ namespace SWADAssgClasses
     {
         private const string FilePath = "car_listings.csv";
 
-        public string carPlate { get; set; }
+        public string carId { get; set; }
+        public string carPlate {  get; set; }
         public string carMake { get; set; }
         public string carModel { get; set; }
         public int carYear { get; set; }
@@ -19,9 +20,9 @@ namespace SWADAssgClasses
 
         public List<AvailabilitySlot> AvailabilitySlots { get; set; }
 
-        public Car(string carPlate, string carMake, string carModel, int carYear, int carMileage, bool carInsurance, decimal rentalRate, string status)
+        public Car(string carId, string carMake, string carModel, int carYear, int carMileage, bool carInsurance, decimal rentalRate, string status)
         {
-            this.carPlate = carPlate;
+            this.carId = carId;
             this.carMake = carMake;
             this.carModel = carModel;
             this.carYear = carYear;
@@ -51,12 +52,12 @@ namespace SWADAssgClasses
 
         public void DisplayCarDetails()
         {
-            Console.WriteLine($"Car Plate: {carPlate}, Make: {carMake}, Model: {carModel}, Year: {carYear}, Mileage: {carMileage}, Insurance: {carInsurance}, Rental Rate: {rentalRate}, Status: {status}");
+            Console.WriteLine($"Car ID: {carId}, Make: {carMake}, Model: {carModel}, Year: {carYear}, Mileage: {carMileage}, Insurance: {carInsurance}, Rental Rate: {rentalRate}, Status: {status}");
         }
 
-        public static Car FindCar(List<Car> cars, string carPlate)
+        public static Car FindCar(List<Car> cars, string carId)
         {
-            return cars.Find(car => car.carPlate == carPlate);
+            return cars.Find(car => car.carId == carId);
         }
 
         public bool IsAvailable(DateTime startDate, DateTime endDate)
@@ -78,15 +79,15 @@ namespace SWADAssgClasses
 
         public string ToCsv()
         {
-            return $"{carPlate},{carMake},{carModel},{carYear},{carMileage},{carInsurance},{rentalRate},{status}";
+            return $"{carId},{carMake},{carModel},{carYear},{carMileage},{carInsurance},{rentalRate},{status}";
         }
 
-        public bool VerifyCarPlate(string carPlate)
+        public bool VerifyCarId(string carId)
         {
             var cars = GetAllCars();
             foreach (var car in cars)
             {
-                if (car.carPlate == carPlate)
+                if (car.carId == carId)
                 {
                     return false;
                 }

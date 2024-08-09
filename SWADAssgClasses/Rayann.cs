@@ -36,13 +36,13 @@ public class Rayann
             Console.Write("Enter car plate: ");
             carPlate = Console.ReadLine();
 
-            if (car.VerifyCarPlate(carPlate))
+            if (car.VerifyCarId(carPlate))
             {
                 break;
             }
             else
             {
-                Console.WriteLine($"Car {carPlate} already exists. Please enter a unique car plate.");
+                Console.WriteLine($"Car plate {carPlate} already exists. Please enter a unique car plate.");
             }
         }
 
@@ -52,6 +52,6 @@ public class Rayann
         car.AddCar(car);
 
         Console.WriteLine("Car registration successful!");
-        Console.WriteLine($"Car {car.carPlate} is registered and available for rent.");
+        Console.WriteLine($"Car {carPlate} is registered and available for rent.");
     }
 }
