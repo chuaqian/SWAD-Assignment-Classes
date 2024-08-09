@@ -20,7 +20,7 @@ namespace SWADAssgClasses
 
         public List<AvailabilitySlot> AvailabilitySlots { get; set; }
 
-        public Car(string carId, string carMake, string carModel, int carYear, int carMileage, bool carInsurance, decimal rentalRate, string status)
+        public Car(string carId, string carMake, string carModel, int carYear, int carMileage, bool carInsurance, decimal rentalRate, string status, string carPlate)
         {
             this.carId = carId;
             this.carMake = carMake;
@@ -30,6 +30,7 @@ namespace SWADAssgClasses
             this.carInsurance = carInsurance;
             this.rentalRate = rentalRate;
             this.status = status;
+            this.carPlate = carPlate;
             AvailabilitySlots = new List<AvailabilitySlot>();
 
             if (!File.Exists(FilePath))
@@ -52,7 +53,7 @@ namespace SWADAssgClasses
 
         public void DisplayCarDetails()
         {
-            Console.WriteLine($"Car ID: {carId}, Make: {carMake}, Model: {carModel}, Year: {carYear}, Mileage: {carMileage}, Insurance: {carInsurance}, Rental Rate: {rentalRate}, Status: {status}");
+            Console.WriteLine($"Car ID: {carId}, Make: {carMake}, Model: {carModel}, Year: {carYear}, Mileage: {carMileage}, Insurance: {carInsurance}, Rental Rate: {rentalRate}, Status: {status}, CarPlate: {carPlate}");
         }
 
         public static Car FindCar(List<Car> cars, string carId)
@@ -119,7 +120,8 @@ namespace SWADAssgClasses
                     int.Parse(values[4]),
                     bool.Parse(values[5]),
                     decimal.Parse(values[6]),
-                    values[7]
+                    values[7],
+                    values[8]
                 );
                 cars.Add(car);
             }

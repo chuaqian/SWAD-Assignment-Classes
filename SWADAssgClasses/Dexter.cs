@@ -206,9 +206,11 @@ class Dexter
             selectedCar.status = "Booked";
 
             Console.WriteLine("Booking confirmed!");
+            Console.Write("Booking details: ");
             Console.WriteLine($"Car ID: {selectedCar.carId}");
             Console.WriteLine($"Start Date: {startDate:dd-MM-yyyy}");
             Console.WriteLine($"End Date: {endDate:dd-MM-yyyy}");
+            Console.WriteLine();
             Console.WriteLine("Booking details have been recorded and a confirmation email has been sent.");
         }
         else
@@ -231,19 +233,19 @@ class Dexter
 
     static void InitializeSampleData()
     {
-        var car1 = new Car("Car001", "Toyota", "Camry", 2020, 15000, true, 50.00m, "Available");
+        var car1 = new Car("Car001", "Toyota", "Camry", 2020, 15000, true, 50.00m, "Available", "SDR1231J");
         car1.AddAvailabilitySlot(new AvailabilitySlot("Slot001", DateTime.Now.AddDays(-5), DateTime.Now.AddDays(10)));
         car1.AddAvailabilitySlot(new AvailabilitySlot("Slot002", DateTime.Now.AddDays(15), DateTime.Now.AddDays(20)));
 
-        var car2 = new Car("Car002", "Honda", "Civic", 2019, 20000, true, 45.00m, "Available");
+        var car2 = new Car("Car002", "Honda", "Civic", 2019, 20000, true, 45.00m, "Available", "JDM3123L");
         car2.AddAvailabilitySlot(new AvailabilitySlot("Slot003", DateTime.Now.AddDays(5), DateTime.Now.AddDays(12)));
         car2.AddAvailabilitySlot(new AvailabilitySlot("Slot004", DateTime.Now.AddDays(20), DateTime.Now.AddDays(25)));
 
-        var car3 = new Car("Car003", "Ford", "Focus", 2018, 30000, true, 40.00m, "Available");
+        var car3 = new Car("Car003", "Ford", "Focus", 2018, 30000, true, 40.00m, "Available", "TRN1231J");
         car3.AddAvailabilitySlot(new AvailabilitySlot("Slot005", DateTime.Now.AddDays(3), DateTime.Now.AddDays(8)));
         car3.AddAvailabilitySlot(new AvailabilitySlot("Slot006", DateTime.Now.AddDays(18), DateTime.Now.AddDays(22)));
 
-        var car4 = new Car("Car004", "Nissan", "Altima", 2017, 35000, true, 35.00m, "Unavailable");
+        var car4 = new Car("Car004", "Nissan", "Altima", 2017, 35000, true, 35.00m, "Unavailable", "SUP1231A");
         car4.AddAvailabilitySlot(new AvailabilitySlot("Slot007", DateTime.Now.AddDays(1), DateTime.Now.AddDays(6)));
         car4.AddAvailabilitySlot(new AvailabilitySlot("Slot008", DateTime.Now.AddDays(10), DateTime.Now.AddDays(15)));
 

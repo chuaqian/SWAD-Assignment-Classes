@@ -1,6 +1,6 @@
 ﻿using System;
 using SWADAssgClasses;
-
+/*
 public class Rayann
 {
     public static void Main()
@@ -55,3 +55,4 @@ public class Rayann
         Console.WriteLine($"Car {carPlate} is registered and available for rent.");
     }
 }
+*/
