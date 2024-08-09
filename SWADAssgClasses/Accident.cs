@@ -8,10 +8,21 @@ namespace SWADAssgClasses
 {
     public class Accident
     {
-        public string accidentId { get; set; }
-        public DateTime accidentDate { get; set; }
-        public string description { get; set; }
-        public string status { get; set; }
-        public string resolvingDetails { get; set; }
+        private static int _nextId = 1;
+
+        public int AccidentId { get; private set; }
+        public DateTime AccidentDate { get; set; }
+        public string Description { get; set; }
+        public bool Status { get; set; }
+        public string ResolvingDetails { get; set; }
+
+        public Accident(DateTime accidentDate, string description, bool status, string resolvingDetails)
+        {
+            AccidentId = _nextId++;
+            AccidentDate = accidentDate;
+            Description = description;
+            Status = status;
+            ResolvingDetails = resolvingDetails;
+        }
     }
 }

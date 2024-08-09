@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>Rayann</StartupObject>
+    <StartupObject>Dexter</StartupObject>
   </PropertyGroup>
 
 </Project>
