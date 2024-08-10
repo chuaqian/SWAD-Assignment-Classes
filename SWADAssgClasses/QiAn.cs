@@ -15,7 +15,7 @@ namespace SWADAssgClasses
             DateTime currentDateTime = DateTime.ParseExact("2024-08-05 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             Console.WriteLine("Current Date/Time: " + currentDateTime.ToString("yyyy-MM-dd HH:mm"));
 
-            // create a sample renter and booking
+            // create a sample renter
             Renter renter = new Renter("1", "John Doe", "123 Main St", "john@example.com", "password", true,
                 "D1234567", "Credit Card", 200m, false, true, DateTime.ParseExact("1990-01-01", "yyyy-MM-dd", CultureInfo.InvariantCulture), "123 Main St");
 
@@ -24,18 +24,27 @@ namespace SWADAssgClasses
             car.AvailabilitySlots.Add(new AvailabilitySlot("S1", DateTime.ParseExact("2024-08-05 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("2024-08-15 12:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)));
 
-            Booking booking = new Booking("B1", DateTime.ParseExact("2024-08-07 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+            // create multiple bookings, some inactive and one active
+            Booking pastBooking1 = new Booking("B0", DateTime.ParseExact("2024-07-01 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("2024-07-07 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), 300m, "Credit Card", "Return Location", "Pick Up Location", false);
+
+            Booking pastBooking2 = new Booking("B2", DateTime.ParseExact("2024-07-10 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("2024-07-15 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), 400m, "Credit Card", "Return Location", "Pick Up Location", false);
+
+            Booking activeBooking = new Booking("B1", DateTime.ParseExact("2024-08-07 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("2024-08-12 10:00", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture), 250m, "Credit Card", "Return Location", "Pick Up Location", true)
             {
                 RentedCar = car,
                 Renter = renter
             };
 
-            // add booking to renter
-            renter.AddBooking(booking);
+            // add bookings to renter
+            renter.AddBooking(pastBooking1);
+            renter.AddBooking(pastBooking2);
+            renter.AddBooking(activeBooking);
 
-            // Set the boolean value based on whether a booking exists or not
-            bool hasBooking = booking != null && booking.isActive;
+            // Set the boolean value based on whether an active booking exists or not
+            bool hasBooking = activeBooking != null && activeBooking.isActive;
 
             if (!hasBooking)
             {
@@ -43,8 +52,8 @@ namespace SWADAssgClasses
                 return;
             }
 
-            // get current reservation details
-            var currentDetails = booking.GetCurrentReservationDetails();
+            // get current reservation details from the active booking
+            var currentDetails = activeBooking.GetCurrentReservationDetails();
             Console.WriteLine("Current Booking Start Date: " + currentDetails.startDate.ToString("yyyy-MM-dd HH:mm"));
             Console.WriteLine("Current Booking End Date: " + currentDetails.endDate.ToString("yyyy-MM-dd HH:mm"));
 
@@ -55,7 +64,7 @@ namespace SWADAssgClasses
                 return;
             }
 
-            while (true) // Loop until a valid modification is made or user decides to exit
+            while (true) // loop until a valid modification is made or user decides to exit
             {
                 // ask the user what they want to modify
                 Console.WriteLine("Do you want to modify the start date or end date? (Enter 'start' or 'end')");
@@ -92,14 +101,14 @@ namespace SWADAssgClasses
                     }
 
                     // modify the start date
-                    bool modificationSuccess = booking.ModifyBookingDates(newStartDate, currentDetails.endDate, currentDateTime);
+                    bool modificationSuccess = activeBooking.ModifyBookingDates(newStartDate, currentDetails.endDate, currentDateTime);
 
                     if (modificationSuccess)
                     {
-                        booking.UpdateBookingDetails();
-                        booking.NotifyRenter(); // displays "Reservation modified successfully."
-                        Console.WriteLine("New Booking Start Date: " + booking.bookingStartDate.ToString("yyyy-MM-dd HH:mm"));
-                        Console.WriteLine("Booking End Date: " + booking.bookingEndDate.ToString("yyyy-MM-dd HH:mm"));
+                        activeBooking.UpdateBookingDetails();
+                        activeBooking.NotifyRenter(); // displays "Reservation modified successfully."
+                        Console.WriteLine("New Booking Start Date: " + activeBooking.bookingStartDate.ToString("yyyy-MM-dd HH:mm"));
+                        Console.WriteLine("Booking End Date: " + activeBooking.bookingEndDate.ToString("yyyy-MM-dd HH:mm"));
                         break; // Exit loop after successful modification
                     }
                     else
@@ -138,14 +147,14 @@ namespace SWADAssgClasses
                     }
 
                     // modify the end date
-                    bool modificationSuccess = booking.ModifyBookingDates(currentDetails.startDate, newEndDate, currentDateTime);
+                    bool modificationSuccess = activeBooking.ModifyBookingDates(currentDetails.startDate, newEndDate, currentDateTime);
 
                     if (modificationSuccess)
                     {
-                        booking.UpdateBookingDetails();
-                        booking.NotifyRenter(); // displays "Reservation modified successfully."
-                        Console.WriteLine("Booking Start Date: " + booking.bookingStartDate.ToString("yyyy-MM-dd HH:mm"));
-                        Console.WriteLine("New Booking End Date: " + booking.bookingEndDate.ToString("yyyy-MM-dd HH:mm"));
+                        activeBooking.UpdateBookingDetails();
+                        activeBooking.NotifyRenter(); // displays "Reservation modified successfully."
+                        Console.WriteLine("Booking Start Date: " + activeBooking.bookingStartDate.ToString("yyyy-MM-dd HH:mm"));
+                        Console.WriteLine("New Booking End Date: " + activeBooking.bookingEndDate.ToString("yyyy-MM-dd HH:mm"));
                         break; // Exit loop after successful modification
                     }
                     else
